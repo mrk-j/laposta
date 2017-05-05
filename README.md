@@ -5,7 +5,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/mrkj/laposta.svg?style=flat-square)](https://scrutinizer-ci.com/g/mrkj/laposta)
 [![Total Downloads](https://img.shields.io/packagist/dt/mrkj/laposta.svg?style=flat-square)](https://packagist.org/packages/mrkj/laposta)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+An easy way to work with the Laposta API.
 
 ## Installation
 You can install the package via composer:
