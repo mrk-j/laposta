@@ -1,9 +1,9 @@
 # An easy way to work with the Laposta API
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrkj/laposta)
-[![Build Status](https://img.shields.io/travis/mrk-j/laposta/master.svg?style=flat-square)](https://travis-ci.org/mrkj/laposta)
-[![Quality Score](https://img.shields.io/scrutinizer/g/mrk-j/laposta.svg?style=flat-square)](https://scrutinizer-ci.com/g/mrkj/laposta)
-[![Total Downloads](https://img.shields.io/packagist/dt/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrkj/laposta)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrk-j/laposta)
+[![Build Status](https://img.shields.io/travis/mrk-j/laposta/master.svg?style=flat-square)](https://travis-ci.org/mrk-j/laposta)
+[![Quality Score](https://img.shields.io/scrutinizer/g/mrk-j/laposta.svg?style=flat-square)](https://scrutinizer-ci.com/g/mrk-j/laposta)
+[![Total Downloads](https://img.shields.io/packagist/dt/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrk-j/laposta)
 
 An easy way to work with the Laposta API.
 
