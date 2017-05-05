@@ -5,10 +5,10 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/mrk-j/laposta.svg?style=flat-square)](https://scrutinizer-ci.com/g/mrk-j/laposta)
 [![Total Downloads](https://img.shields.io/packagist/dt/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrk-j/laposta)
 
-An easy way to work with the Laposta API.
+An easy way to work with the Laposta API. This package is currently under development and therefore **not available through Packagist/composer yet**!
 
-## Installation
-You can install the package via composer:
+## ~~Installation~~
+~~You can install the package via composer:~~
 
 ```bash
 composer require mrk-j/laposta
