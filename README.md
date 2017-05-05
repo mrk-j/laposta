@@ -1,9 +1,9 @@
 # An easy way to work with the Laposta API
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mrkj/laposta.svg?style=flat-square)](https://packagist.org/packages/mrkj/laposta)
-[![Build Status](https://img.shields.io/travis/mrkj/laposta/master.svg?style=flat-square)](https://travis-ci.org/mrkj/laposta)
-[![Quality Score](https://img.shields.io/scrutinizer/g/mrkj/laposta.svg?style=flat-square)](https://scrutinizer-ci.com/g/mrkj/laposta)
-[![Total Downloads](https://img.shields.io/packagist/dt/mrkj/laposta.svg?style=flat-square)](https://packagist.org/packages/mrkj/laposta)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrkj/laposta)
+[![Build Status](https://img.shields.io/travis/mrk-j/laposta/master.svg?style=flat-square)](https://travis-ci.org/mrkj/laposta)
+[![Quality Score](https://img.shields.io/scrutinizer/g/mrk-j/laposta.svg?style=flat-square)](https://scrutinizer-ci.com/g/mrkj/laposta)
+[![Total Downloads](https://img.shields.io/packagist/dt/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrkj/laposta)
 
 An easy way to work with the Laposta API.
 
@@ -11,7 +11,7 @@ An easy way to work with the Laposta API.
 You can install the package via composer:
 
 ```bash
-composer require mrkj/laposta
+composer require mrk-j/laposta
 ```
 
 ## Usage
