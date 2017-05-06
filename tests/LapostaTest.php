@@ -93,7 +93,7 @@ class LapostaTest extends TestCase
                     'remarks' => $list->getRemarks(),
                     'subscribe_notification_email' => $list->getSubscribeNotificationEmail(),
                     'unsubscribe_notification_email' => $list->getUnsubsribeNotificationEmail(),
-                ]
+                ],
             ]])
             ->once()
             ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], $json));
@@ -120,7 +120,7 @@ class LapostaTest extends TestCase
                     'remarks' => $list->getRemarks(),
                     'subscribe_notification_email' => $list->getSubscribeNotificationEmail(),
                     'unsubscribe_notification_email' => $list->getUnsubsribeNotificationEmail(),
-                ]
+                ],
             ]])
             ->once()
             ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__.'/fixtures/list.json')));
