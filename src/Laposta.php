@@ -5,6 +5,7 @@ namespace Mrkj\Laposta;
 use GuzzleHttp\Client;
 use Mrkj\Laposta\Models\List_;
 use GuzzleHttp\Exception\RequestException;
+use Mrkj\Transformers\ListTransformer;
 
 class Laposta
 {
@@ -69,12 +70,7 @@ class Laposta
     public function createList(List_ $list)
     {
         $data = $this->post('list', [
-            'form_params' => [
-                'name' => $list->getName(),
-                'remarks' => $list->getRemarks(),
-                'subscribe_notification_email' => $list->getSubscribeNotificationEmail(),
-                'unsubscribe_notification_email' => $list->getUnsubsribeNotificationEmail(),
-            ],
+            'form_params' => ListTransformer::toFormParams($list),
         ]);
 
         $list->updateFromResponse($data['list']);
@@ -83,12 +79,7 @@ class Laposta
     public function updateList(List_ $list)
     {
         $this->client->post('list/'.$list->getListId(), [
-            'form_params' => [
-                'name' => $list->getName(),
-                'remarks' => $list->getRemarks(),
-                'subscribe_notification_email' => $list->getSubscribeNotificationEmail(),
-                'unsubscribe_notification_email' => $list->getUnsubsribeNotificationEmail(),
-            ],
+            'form_params' => ListTransformer::toFormParams($list),
         ]);
     }
 
