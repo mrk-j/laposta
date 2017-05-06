@@ -4,8 +4,8 @@ namespace Mrkj\Laposta;
 
 use GuzzleHttp\Client;
 use Mrkj\Laposta\Models\List_;
-use Mrkj\Laposta\Transformers\ListTransformer;
 use GuzzleHttp\Exception\RequestException;
+use Mrkj\Laposta\Transformers\ListTransformer;
 
 class Laposta
 {
