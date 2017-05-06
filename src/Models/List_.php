@@ -78,11 +78,27 @@ class List_
     }
 
     /**
+     * @param mixed $accountId
+     */
+    public function setAccountId($accountId)
+    {
+        $this->accountId = $accountId;
+    }
+
+    /**
      * @return mixed
      */
     public function getListId()
     {
         return $this->listId;
+    }
+
+    /**
+     * @param mixed $listId
+     */
+    public function setListId($listId)
+    {
+        $this->listId = $listId;
     }
 
     /**
@@ -94,11 +110,27 @@ class List_
     }
 
     /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
      * @return mixed
      */
     public function getModified()
     {
         return $this->modified;
+    }
+
+    /**
+     * @param mixed $modified
+     */
+    public function setModified($modified)
+    {
+        $this->modified = $modified;
     }
 
     /**
@@ -110,11 +142,27 @@ class List_
     }
 
     /**
+     * @param mixed $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    /**
      * @return mixed
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -126,11 +174,27 @@ class List_
     }
 
     /**
+     * @param mixed $remarks
+     */
+    public function setRemarks($remarks)
+    {
+        $this->remarks = $remarks;
+    }
+
+    /**
      * @return mixed
      */
     public function getSubscribeNotificationEmail()
     {
         return $this->subscribeNotificationEmail;
+    }
+
+    /**
+     * @param mixed $subscribeNotificationEmail
+     */
+    public function setSubscribeNotificationEmail($subscribeNotificationEmail)
+    {
+        $this->subscribeNotificationEmail = $subscribeNotificationEmail;
     }
 
     /**
@@ -142,11 +206,27 @@ class List_
     }
 
     /**
+     * @param mixed $unsubsribeNotificationEmail
+     */
+    public function setUnsubsribeNotificationEmail($unsubsribeNotificationEmail)
+    {
+        $this->unsubsribeNotificationEmail = $unsubsribeNotificationEmail;
+    }
+
+    /**
      * @return mixed
      */
     public function getNumberOfActiveMembers()
     {
         return $this->numberOfActiveMembers;
+    }
+
+    /**
+     * @param mixed $numberOfActiveMembers
+     */
+    public function setNumberOfActiveMembers($numberOfActiveMembers)
+    {
+        $this->numberOfActiveMembers = $numberOfActiveMembers;
     }
 
     /**
@@ -158,10 +238,26 @@ class List_
     }
 
     /**
+     * @param mixed $numberOfUnsubscribedMembers
+     */
+    public function setNumberOfUnsubscribedMembers($numberOfUnsubscribedMembers)
+    {
+        $this->numberOfUnsubscribedMembers = $numberOfUnsubscribedMembers;
+    }
+
+    /**
      * @return mixed
      */
     public function getNumberOfCleanedMembers()
     {
         return $this->numberOfCleanedMembers;
+    }
+
+    /**
+     * @param mixed $numberOfCleanedMembers
+     */
+    public function setNumberOfCleanedMembers($numberOfCleanedMembers)
+    {
+        $this->numberOfCleanedMembers = $numberOfCleanedMembers;
     }
 }
