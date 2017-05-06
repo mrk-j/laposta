@@ -3,8 +3,8 @@
 namespace Mrkj\Laposta;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use Mrkj\Laposta\Models\List_;
+use GuzzleHttp\Exception\RequestException;
 
 class Laposta
 {
@@ -20,13 +20,13 @@ class Laposta
 
     public function __construct($apiKey = null, $client = null)
     {
-        if(empty(trim($apiKey))) {
+        if (empty(trim($apiKey))) {
             throw new \Exception('No API key provided');
         }
 
         $this->apiKey = $apiKey;
 
-        if($client && $client instanceof Client) {
+        if ($client && $client instanceof Client) {
             $this->client = $client;
         } else {
             $this->client = new Client([
@@ -43,7 +43,7 @@ class Laposta
 
         $lists = [];
 
-        foreach($data['data'] as $listResponse) {
+        foreach ($data['data'] as $listResponse) {
             $lists[] = List_::createFromResponse($listResponse);
         }
 
@@ -52,16 +52,13 @@ class Laposta
 
     private function getJson($uri)
     {
-        try
-        {
+        try {
             $response = $this->client->get($uri);
 
             $data = json_decode($response->getBody()->getContents(), true);
 
             return $data;
-        }
-        catch (RequestException $e)
-        {
+        } catch (RequestException $e) {
             throw new \Exception('No connection to Laposta');
         }
     }
