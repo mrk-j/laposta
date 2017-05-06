@@ -1,8 +1,8 @@
 <?php
 
+use GuzzleHttp\Client;
 use Mrkj\Laposta\Laposta;
 use PHPUnit\Framework\TestCase;
-use GuzzleHttp\Client;
 
 class LapostaTest extends TestCase
 {
@@ -50,7 +50,7 @@ class LapostaTest extends TestCase
             ->shouldReceive('get')
             ->withArgs(['list'])
             ->once()
-            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__ . '/fixtures/list.json')));
+            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__.'/fixtures/list.json')));
 
         $lists = $this->laposta->getLists();
 
