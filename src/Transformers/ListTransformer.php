@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrkj\Transformers;
+namespace Mrkj\Laposta\Transformers;
 
 use Mrkj\Laposta\Models\List_;
 

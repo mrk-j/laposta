@@ -4,7 +4,7 @@ namespace Mrkj\Laposta;
 
 use GuzzleHttp\Client;
 use Mrkj\Laposta\Models\List_;
-use Mrkj\Transformers\ListTransformer;
+use Mrkj\Laposta\Transformers\ListTransformer;
 use GuzzleHttp\Exception\RequestException;
 
 class Laposta
@@ -78,9 +78,11 @@ class Laposta
 
     public function updateList(List_ $list)
     {
-        $this->client->post('list/'.$list->getListId(), [
+        $data = $this->post('list/'.$list->getListId(), [
             'form_params' => ListTransformer::toFormParams($list),
         ]);
+
+        $list->updateFromResponse($data['list']);
     }
 
     private function get($uri, $options = [])
