@@ -3,6 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrk-j/laposta)
 [![Build Status](https://img.shields.io/travis/mrk-j/laposta/master.svg?style=flat-square)](https://travis-ci.org/mrk-j/laposta)
 [![Quality Score](https://img.shields.io/scrutinizer/g/mrk-j/laposta.svg?style=flat-square)](https://scrutinizer-ci.com/g/mrk-j/laposta)
+[![StyleCI](https://styleci.io/repos/90415839/shield?branch=master)](https://styleci.io/repos/90415839)
 [![Total Downloads](https://img.shields.io/packagist/dt/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrk-j/laposta)
 
 An easy way to work with the Laposta API. This package is currently under development and therefore **not available through Packagist/composer yet**!
