@@ -48,9 +48,9 @@ class LapostaTest extends TestCase
     {
         $this->client
             ->shouldReceive('request')
-            ->withArgs(['get', 'list', array()])
+            ->withArgs(['get', 'list', []])
             ->once()
-            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__ . '/fixtures/lists.json')));
+            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__.'/fixtures/lists.json')));
 
         $lists = $this->laposta->getLists();
 
@@ -66,9 +66,9 @@ class LapostaTest extends TestCase
 
         $this->client
             ->shouldReceive('request')
-            ->withArgs(['get', 'list/'.$listId, array()])
+            ->withArgs(['get', 'list/'.$listId, []])
             ->once()
-            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__ . '/fixtures/list.json')));
+            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__.'/fixtures/list.json')));
 
         $list = $this->laposta->getList($listId);
 

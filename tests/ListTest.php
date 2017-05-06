@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class ListTest extends TestCase
 {
-    function testSettersAndGetters()
+    public function testSettersAndGetters()
     {
         $list = new List_();
 
