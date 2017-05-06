@@ -2,8 +2,14 @@
 
 namespace Mrkj\Transformers;
 
+use Mrkj\Laposta\Models\List_;
+
 class ListTransformer
 {
+    /**
+     * @param List_ $list
+     * @return array
+     */
     public static function toFormParams(List_ $list)
     {
         return [
