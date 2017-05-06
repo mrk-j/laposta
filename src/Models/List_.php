@@ -17,56 +17,29 @@ class List_
     private $numberOfUnsubscribedMembers;
     private $numberOfCleanedMembers;
 
-    public function __construct(
-        $accountId,
-        $listId,
-        $created,
-        $modified,
-        $state,
-        $name,
-        $remarks,
-        $subscribeNotificationEmail,
-        $unsubsribeNotificationEmail,
-        $numberOfActiveMembers,
-        $numberOfUnsubscribedMembers,
-        $numberOfCleanedMembers
-    ) {
-        $this->accountId = $accountId;
-        $this->listId = $listId;
-        $this->created = $created;
-        $this->modified = $modified;
-        $this->state = $state;
-        $this->name = $name;
-        $this->remarks = $remarks;
-        $this->subscribeNotificationEmail = $subscribeNotificationEmail;
-        $this->unsubsribeNotificationEmail = $unsubsribeNotificationEmail;
-        $this->numberOfActiveMembers = $numberOfActiveMembers;
-        $this->numberOfUnsubscribedMembers = $numberOfUnsubscribedMembers;
-        $this->numberOfCleanedMembers = $numberOfCleanedMembers;
-    }
-
     public static function createFromResponse($response)
     {
-        if ($response['list']) {
-            $list = $response['list'];
+        $self = new self;
 
-            return new self(
-                $list['account_id'],
-                $list['list_id'],
-                $list['created'],
-                $list['modified'],
-                $list['state'],
-                $list['name'],
-                $list['remarks'],
-                $list['subscribe_notification_email'],
-                $list['unsubscribe_notification_email'],
-                $list['members']['active'],
-                $list['members']['unsubscribed'],
-                $list['members']['cleaned']
-            );
-        }
+        $self->updateFromResponse($response);
 
-        return false;
+        return $self;
+    }
+
+    public function updateFromResponse($response)
+    {
+        $this->setAccountId($response['account_id']);
+        $this->setListId($response['list_id']);
+        $this->setCreated($response['created']);
+        $this->setModified($response['modified']);
+        $this->setState($response['state']);
+        $this->setName($response['name']);
+        $this->setRemarks($response['remarks']);
+        $this->setSubscribeNotificationEmail($response['subscribe_notification_email']);
+        $this->setUnsubsribeNotificationEmail($response['unsubscribe_notification_email']);
+        $this->setNumberOfActiveMembers($response['members']['active']);
+        $this->setNumberOfUnsubscribedMembers($response['members']['unsubscribed']);
+        $this->setNumberOfCleanedMembers($response['members']['cleaned']);
     }
 
     /**

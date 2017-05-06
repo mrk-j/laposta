@@ -9,7 +9,7 @@ class LapostaTest extends TestCase
     /**
      * @var string
      */
-    private $apiKey = 'foo';
+    private $apiKey = 'JdMtbsMq2jqJdQZD9AHC';
 
     /**
      * @var Laposta
@@ -47,10 +47,10 @@ class LapostaTest extends TestCase
     public function testGetLists()
     {
         $this->client
-            ->shouldReceive('get')
-            ->withArgs(['list'])
+            ->shouldReceive('request')
+            ->withArgs(['get', 'list', array()])
             ->once()
-            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__.'/fixtures/list.json')));
+            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__ . '/fixtures/lists.json')));
 
         $lists = $this->laposta->getLists();
 
@@ -58,5 +58,22 @@ class LapostaTest extends TestCase
         $this->assertContainsOnlyInstancesOf(\Mrkj\Laposta\Models\List_::class, $lists);
         $this->assertCount(1, $lists);
         $this->assertEquals('Testlijst', $lists[0]->getName());
+    }
+
+    public function testGetList()
+    {
+        $listId = '0a9b0ddz67';
+
+        $this->client
+            ->shouldReceive('request')
+            ->withArgs(['get', 'list/'.$listId, array()])
+            ->once()
+            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__ . '/fixtures/list.json')));
+
+        $list = $this->laposta->getList($listId);
+
+        $this->assertInstanceOf(\Mrkj\Laposta\Models\List_::class, $list);
+        $this->assertEquals('Testlijst', $list->getName());
+        $this->assertEquals($listId, $list->getListId());
     }
 }

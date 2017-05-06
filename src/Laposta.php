@@ -37,29 +37,81 @@ class Laposta
         }
     }
 
+    /**
+     * @return List_[]
+     */
     public function getLists()
     {
-        $data = $this->getJson('list');
+        $data = $this->get('list');
 
         $lists = [];
 
         foreach ($data['data'] as $listResponse) {
-            $lists[] = List_::createFromResponse($listResponse);
+            $lists[] = List_::createFromResponse($listResponse['list']);
         }
 
         return $lists;
     }
 
-    private function getJson($uri)
+    /**
+     * @param $listId
+     * @return bool|List_
+     */
+    public function getList($listId)
+    {
+        $data = $this->get('list/'.$listId);
+
+        $list = List_::createFromResponse($data['list']);
+
+        return $list;
+    }
+
+    public function createList(List_ $list)
+    {
+        $data = $this->post('list', [
+            'form_params' => [
+                'name' => $list->getName(),
+                'remarks' => $list->getRemarks(),
+                'subscribe_notification_email' => $list->getSubscribeNotificationEmail(),
+                'unsubscribe_notification_email' => $list->getUnsubsribeNotificationEmail(),
+            ],
+        ]);
+
+        $list->updateFromResponse($data['list']);
+    }
+
+    public function updateList(List_ $list)
+    {
+        $this->client->post('list/'.$list->getListId(), [
+            'form_params' => [
+                'name' => $list->getName(),
+                'remarks' => $list->getRemarks(),
+                'subscribe_notification_email' => $list->getSubscribeNotificationEmail(),
+                'unsubscribe_notification_email' => $list->getUnsubsribeNotificationEmail(),
+            ],
+        ]);
+    }
+
+    private function get($uri, $options = [])
+    {
+        return $this->request('get', $uri, $options);
+    }
+
+    private function post($uri, $options = [])
+    {
+        return $this->request('post', $uri, $options);
+    }
+
+    private function request($method, $uri, $options = [])
     {
         try {
-            $response = $this->client->get($uri);
+            $response = $this->client->request($method, $uri, $options);
 
             $data = json_decode($response->getBody()->getContents(), true);
 
             return $data;
         } catch (RequestException $e) {
-            throw new \Exception('No connection to Laposta');
+            throw new \Exception('Loading Laposta resource failed: '.$e->getMessage());
         }
     }
 }

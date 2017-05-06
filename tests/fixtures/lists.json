@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "list": {
+        "account_id": "wFiUS4HL4e",
+        "list_id": "0a9b0ddz67",
+        "created": "2017-03-29 15:36:23",
+        "modified": null,
+        "state": "active",
+        "name": "Testlijst",
+        "remarks": "Een lijst om mee te testen",
+        "subscribe_notification_email": "aanmeldingen@example.net",
+        "unsubscribe_notification_email": "afmeldingen@example.net",
+        "members": {
+          "active": 0,
+          "unsubscribed": 0,
+          "cleaned": 0
+        }
+      }
+    }
+  ]
+}
