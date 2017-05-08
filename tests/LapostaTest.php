@@ -153,4 +153,22 @@ class LapostaTest extends TestCase
         $this->assertEquals($listId, $list->getListId());
         $this->assertEquals('deleted', $list->getState());
     }
+
+    public function testGetMembers()
+    {
+        $listId = '0a9b0ddz67';
+
+        $this->client
+            ->shouldReceive('request')
+            ->withArgs(['get', 'member?list_id='.$listId.'&state=active', []])
+            ->once()
+            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__.'/fixtures/members.json')));
+
+        $members = $this->laposta->getMembers($listId);
+
+        $this->assertInternalType('array', $members);
+        $this->assertContainsOnlyInstancesOf(\Mrkj\Laposta\Models\Member::class, $members);
+        $this->assertCount(2, $members);
+        $this->assertEquals('maartje@example.net', $members[0]->getEmail());
+    }
 }

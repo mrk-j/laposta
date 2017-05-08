@@ -4,7 +4,7 @@ namespace Mrkj\Laposta;
 
 use GuzzleHttp\Client;
 use Mrkj\Laposta\Models\List_;
-use GuzzleHttp\Exception\RequestException;
+use Mrkj\Laposta\Models\Member;
 use Mrkj\Laposta\Transformers\ListTransformer;
 
 class Laposta
@@ -105,6 +105,33 @@ class Laposta
         $data = $this->delete('list/'.$list->getListId());
 
         $list->updateFromResponse($data['list']);
+    }
+
+    /**
+     * @param List_|string $list
+     * @param string $state
+     * @return Member[]
+     */
+    public function getMembers($list, $state = Member::STATE_ACTIVE)
+    {
+        $listId = $list instanceof List_ ? $list->getListId() : $list;
+
+        $params = ['list_id' => $listId];
+
+        if(!is_null($state) && in_array($state, Member::STATES))
+        {
+            $params['state'] = $state;
+        }
+
+        $data = $this->get('member?'.http_build_query($params));
+
+        $members = [];
+
+        foreach ($data['data'] as $listResponse) {
+            $members[] = Member::createFromResponse($listResponse['member']);
+        }
+
+        return $members;
     }
 
     /**

@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "member": {
+        "member_id": "9978ydioiZ",
+        "list_id": "0a9b0ddz67",
+        "email": "maartje@example.net",
+        "state": "active",
+        "signup_date": "2012-08-13 16:13:07",
+        "modified": null,
+        "ip": "198.51.100.10",
+        "source_url": "http://example.com",
+        "custom_fields": {
+          "name": "Maartje",
+          "dateofbirth": "1973-05-10 00:00:00",
+          "children": 3,
+          "prefs": [
+            "optionA",
+            "optionB"
+          ]
+        }
+      }
+    },
+    {
+      "member": {
+        "member_id": "Hy8RA178HB",
+        "list_id": "0a9b0ddz67",
+        "email": "stefan@example.net",
+        "state": "active",
+        "signup_date": "2012-06-24 11:54:12",
+        "modified": null,
+        "ip": "198.51.100.10",
+        "source_url": "http://example.com",
+        "custom_fields": {
+          "name": "Stefan",
+          "dateofbirth": null,
+          "children": 0,
+          "prefs": [
+            "optionA"
+          ]
+        }
+      }
+    }
+  ]
+}
