@@ -118,8 +118,7 @@ class Laposta
 
         $params = ['list_id' => $listId];
 
-        if(!is_null($state) && in_array($state, Member::STATES))
-        {
+        if (! is_null($state) && in_array($state, Member::STATES)) {
             $params['state'] = $state;
         }
 

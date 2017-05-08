@@ -190,7 +190,7 @@ class Member
      */
     public function setCustomFields($customFields)
     {
-        if(is_array($customFields)) {
+        if (is_array($customFields)) {
             $this->customFields = $customFields;
         }
     }
