@@ -19,6 +19,12 @@ class Laposta
      */
     private $client;
 
+    /**
+     * Laposta constructor.
+     * @param null|string $apiKey
+     * @param null|Client $client
+     * @throws \Exception
+     */
     public function __construct($apiKey = null, $client = null)
     {
         if (empty(trim($apiKey))) {
@@ -41,7 +47,7 @@ class Laposta
     /**
      * @return List_[]
      */
-    public function getLists()
+    public function getLists() : array
     {
         $data = $this->get('list');
 
@@ -56,9 +62,9 @@ class Laposta
 
     /**
      * @param $listId
-     * @return bool|List_
+     * @return List_
      */
-    public function getList($listId)
+    public function getList($listId) : List_
     {
         $data = $this->get('list/'.$listId);
 
@@ -67,6 +73,9 @@ class Laposta
         return $list;
     }
 
+    /**
+     * @param List_ $list
+     */
     public function createList(List_ $list)
     {
         $data = $this->post('list', [
@@ -76,6 +85,9 @@ class Laposta
         $list->updateFromResponse($data['list']);
     }
 
+    /**
+     * @param List_ $list
+     */
     public function updateList(List_ $list)
     {
         $data = $this->post('list/'.$list->getListId(), [
@@ -85,26 +97,58 @@ class Laposta
         $list->updateFromResponse($data['list']);
     }
 
-    private function get($uri, $options = [])
+    /**
+     * @param List_ $list
+     */
+    public function deleteList(List_ $list)
+    {
+        $data = $this->delete('list/'.$list->getListId());
+
+        $list->updateFromResponse($data['list']);
+    }
+
+    /**
+     * @param string $uri
+     * @param array $options
+     * @return mixed
+     */
+    private function get($uri, $options = []) : array
     {
         return $this->request('get', $uri, $options);
     }
 
-    private function post($uri, $options = [])
+    /**
+     * @param string $uri
+     * @param array $options
+     * @return mixed
+     */
+    private function post($uri, $options = []) : array
     {
         return $this->request('post', $uri, $options);
     }
 
-    private function request($method, $uri, $options = [])
+    /**
+     * @param string $uri
+     * @param array $options
+     * @return array
+     */
+    private function delete($uri, $options = []) : array
     {
-        try {
-            $response = $this->client->request($method, $uri, $options);
+        return $this->request('delete', $uri, $options);
+    }
 
-            $data = json_decode($response->getBody()->getContents(), true);
+    /**
+     * @param string $method
+     * @param string $uri
+     * @param array $options
+     * @return array
+     */
+    private function request($method, $uri, $options = []) : array
+    {
+        $response = $this->client->request($method, $uri, $options);
 
-            return $data;
-        } catch (RequestException $e) {
-            throw new \Exception('Loading Laposta resource failed: '.$e->getMessage());
-        }
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return $data;
     }
 }

@@ -131,4 +131,26 @@ class LapostaTest extends TestCase
         $this->assertEquals('Testlijst', $list->getName());
         $this->assertEquals($listId, $list->getListId());
     }
+
+    public function testDeleteList()
+    {
+        $listId = '0a9b0ddz67';
+
+        $json = file_get_contents(__DIR__.'/fixtures/list-deleted.json');
+
+        $list = \Mrkj\Laposta\Models\List_::createFromResponse(json_decode($json, true)['list']);
+
+        $this->client
+            ->shouldReceive('request')
+            ->withArgs(['delete', 'list/'.$listId, []])
+            ->once()
+            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], $json));
+
+        $this->laposta->deleteList($list);
+
+        $this->assertInstanceOf(\Mrkj\Laposta\Models\List_::class, $list);
+        $this->assertEquals('Testlijst', $list->getName());
+        $this->assertEquals($listId, $list->getListId());
+        $this->assertEquals('deleted', $list->getState());
+    }
 }

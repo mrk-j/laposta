@@ -17,7 +17,11 @@ class List_
     private $numberOfUnsubscribedMembers;
     private $numberOfCleanedMembers;
 
-    public static function createFromResponse($response)
+    /**
+     * @param array $response
+     * @return List_
+     */
+    public static function createFromResponse(array $response) : List_
     {
         $self = new self;
 
@@ -26,7 +30,10 @@ class List_
         return $self;
     }
 
-    public function updateFromResponse($response)
+    /**
+     * @param array $response
+     */
+    public function updateFromResponse(array $response)
     {
         $this->setAccountId($response['account_id']);
         $this->setListId($response['list_id']);
