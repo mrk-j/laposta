@@ -133,6 +133,11 @@ class Laposta
         return $members;
     }
 
+    /**
+     * @param List_|string $list
+     * @param string $memberId
+     * @return Member
+     */
     public function getMember($list, string $memberId) : Member
     {
         $listId = $list instanceof List_ ? $list->id : $list;
