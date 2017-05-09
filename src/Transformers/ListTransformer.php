@@ -13,10 +13,10 @@ class ListTransformer
     public static function toFormParams(List_ $list) : array
     {
         return [
-            'name' => $list->getName(),
-            'remarks' => $list->getRemarks(),
-            'subscribe_notification_email' => $list->getSubscribeNotificationEmail(),
-            'unsubscribe_notification_email' => $list->getUnsubsribeNotificationEmail(),
+            'name' => $list->name,
+            'remarks' => $list->remarks,
+            'subscribe_notification_email' => $list->subscribeNotificationEmail,
+            'unsubscribe_notification_email' => $list->unsubsribeNotificationEmail,
         ];
     }
 }

@@ -57,7 +57,7 @@ class LapostaTest extends TestCase
         $this->assertInternalType('array', $lists);
         $this->assertContainsOnlyInstancesOf(\Mrkj\Laposta\Models\List_::class, $lists);
         $this->assertCount(1, $lists);
-        $this->assertEquals('Testlijst', $lists[0]->getName());
+        $this->assertEquals('Testlijst', $lists[0]->name);
     }
 
     public function testGetList()
@@ -73,8 +73,8 @@ class LapostaTest extends TestCase
         $list = $this->laposta->getList($listId);
 
         $this->assertInstanceOf(\Mrkj\Laposta\Models\List_::class, $list);
-        $this->assertEquals('Testlijst', $list->getName());
-        $this->assertEquals($listId, $list->getListId());
+        $this->assertEquals('Testlijst', $list->name);
+        $this->assertEquals($listId, $list->id);
     }
 
     public function testUpdateList()
@@ -89,10 +89,10 @@ class LapostaTest extends TestCase
             ->shouldReceive('request')
             ->withArgs(['post', 'list/'.$listId, [
                 'form_params' => [
-                    'name' => $list->getName(),
-                    'remarks' => $list->getRemarks(),
-                    'subscribe_notification_email' => $list->getSubscribeNotificationEmail(),
-                    'unsubscribe_notification_email' => $list->getUnsubsribeNotificationEmail(),
+                    'name' => $list->name,
+                    'remarks' => $list->remarks,
+                    'subscribe_notification_email' => $list->subscribeNotificationEmail,
+                    'unsubscribe_notification_email' => $list->unsubsribeNotificationEmail,
                 ],
             ]])
             ->once()
@@ -101,8 +101,8 @@ class LapostaTest extends TestCase
         $this->laposta->updateList($list);
 
         $this->assertInstanceOf(\Mrkj\Laposta\Models\List_::class, $list);
-        $this->assertEquals('Testlijst', $list->getName());
-        $this->assertEquals($listId, $list->getListId());
+        $this->assertEquals('Testlijst', $list->name);
+        $this->assertEquals($listId, $list->id);
     }
 
     public function testCreateList()
@@ -110,16 +110,16 @@ class LapostaTest extends TestCase
         $listId = '0a9b0ddz67';
 
         $list = new \Mrkj\Laposta\Models\List_();
-        $list->setName('Testlijst');
+        $list->name = 'Testlijst';
 
         $this->client
             ->shouldReceive('request')
             ->withArgs(['post', 'list', [
                 'form_params' => [
-                    'name' => $list->getName(),
-                    'remarks' => $list->getRemarks(),
-                    'subscribe_notification_email' => $list->getSubscribeNotificationEmail(),
-                    'unsubscribe_notification_email' => $list->getUnsubsribeNotificationEmail(),
+                    'name' => $list->name,
+                    'remarks' => $list->remarks,
+                    'subscribe_notification_email' => $list->subscribeNotificationEmail,
+                    'unsubscribe_notification_email' => $list->unsubsribeNotificationEmail,
                 ],
             ]])
             ->once()
@@ -128,8 +128,8 @@ class LapostaTest extends TestCase
         $this->laposta->createList($list);
 
         $this->assertInstanceOf(\Mrkj\Laposta\Models\List_::class, $list);
-        $this->assertEquals('Testlijst', $list->getName());
-        $this->assertEquals($listId, $list->getListId());
+        $this->assertEquals('Testlijst', $list->name);
+        $this->assertEquals($listId, $list->id);
     }
 
     public function testDeleteList()
@@ -149,9 +149,9 @@ class LapostaTest extends TestCase
         $this->laposta->deleteList($list);
 
         $this->assertInstanceOf(\Mrkj\Laposta\Models\List_::class, $list);
-        $this->assertEquals('Testlijst', $list->getName());
-        $this->assertEquals($listId, $list->getListId());
-        $this->assertEquals('deleted', $list->getState());
+        $this->assertEquals('Testlijst', $list->name);
+        $this->assertEquals($listId, $list->id);
+        $this->assertEquals('deleted', $list->state);
     }
 
     public function testGetMembers()
@@ -169,7 +169,7 @@ class LapostaTest extends TestCase
         $this->assertInternalType('array', $members);
         $this->assertContainsOnlyInstancesOf(\Mrkj\Laposta\Models\Member::class, $members);
         $this->assertCount(2, $members);
-        $this->assertEquals('maartje@example.net', $members[0]->getEmail());
+        $this->assertEquals('maartje@example.net', $members[0]->email);
     }
 
     public function testGetMember()
@@ -186,8 +186,8 @@ class LapostaTest extends TestCase
         $member = $this->laposta->getMember($listId, $memberId);
 
         $this->assertInstanceOf(\Mrkj\Laposta\Models\Member::class, $member);
-        $this->assertEquals('maartje@example.net', $member->getEmail());
-        $this->assertEquals($listId, $member->getListId());
-        $this->assertEquals($memberId, $member->getMemberId());
+        $this->assertEquals('maartje@example.net', $member->email);
+        $this->assertEquals($listId, $member->listId);
+        $this->assertEquals($memberId, $member->id);
     }
 }

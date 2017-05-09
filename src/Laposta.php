@@ -90,7 +90,7 @@ class Laposta
      */
     public function updateList(List_ $list)
     {
-        $data = $this->post('list/'.$list->getListId(), [
+        $data = $this->post('list/'.$list->id, [
             'form_params' => ListTransformer::toFormParams($list),
         ]);
 
@@ -102,7 +102,7 @@ class Laposta
      */
     public function deleteList(List_ $list)
     {
-        $data = $this->delete('list/'.$list->getListId());
+        $data = $this->delete('list/'.$list->id);
 
         $list->updateFromResponse($data['list']);
     }
@@ -114,7 +114,7 @@ class Laposta
      */
     public function getMembers($list, $state = Member::STATE_ACTIVE) : array
     {
-        $listId = $list instanceof List_ ? $list->getListId() : $list;
+        $listId = $list instanceof List_ ? $list->id : $list;
 
         $params = ['list_id' => $listId];
 
@@ -135,7 +135,7 @@ class Laposta
 
     public function getMember($list, string $memberId) : Member
     {
-        $listId = $list instanceof List_ ? $list->getListId() : $list;
+        $listId = $list instanceof List_ ? $list->id : $list;
 
         $data = $this->get('member/'.$memberId.'?'.http_build_query(['list_id' => $listId]));
 
