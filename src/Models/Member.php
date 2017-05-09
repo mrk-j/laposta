@@ -67,4 +67,22 @@ class Member
             $this->customFields = $customFields;
         }
     }
+
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function setCustomField($key, $value)
+    {
+        $this->customFields[$key] = $value;
+    }
+
+    /**
+     * @param $key
+     * @return mixed
+     */
+    public function getCustomField($key)
+    {
+        return isset($this->customFields[$key]) ? $this->customFields[$key] : null;
+    }
 }
