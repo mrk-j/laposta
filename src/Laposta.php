@@ -112,7 +112,7 @@ class Laposta
      * @param string $state
      * @return Member[]
      */
-    public function getMembers($list, $state = Member::STATE_ACTIVE)
+    public function getMembers($list, $state = Member::STATE_ACTIVE) : array
     {
         $listId = $list instanceof List_ ? $list->getListId() : $list;
 
@@ -131,6 +131,17 @@ class Laposta
         }
 
         return $members;
+    }
+
+    public function getMember($list, string $memberId) : Member
+    {
+        $listId = $list instanceof List_ ? $list->getListId() : $list;
+
+        $data = $this->get('member/'.$memberId.'?'.http_build_query(['list_id' => $listId]));
+
+        $member = Member::createFromResponse($data['member']);
+
+        return $member;
     }
 
     /**
