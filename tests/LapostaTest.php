@@ -190,4 +190,33 @@ class LapostaTest extends TestCase
         $this->assertEquals($listId, $member->listId);
         $this->assertEquals($memberId, $member->id);
     }
+
+    public function testUpdateMember()
+    {
+        $memberId = '9978ydioiZ';
+        $listId = '0a9b0ddz67';
+
+        $json = file_get_contents(__DIR__.'/fixtures/member.json');
+
+        $member = \Mrkj\Laposta\Models\Member::createFromResponse(json_decode($json, true)['member']);
+
+        $this->client
+            ->shouldReceive('request')
+            ->withArgs(['post', 'member/'.$memberId.'?list_id='.$listId, [
+                'form_params' => [
+                    'list_id' => $member->listId,
+                    'email' => $member->email,
+                    'state' => $member->state,
+                    'custom_fields' => $member->getCustomFields(),
+                ],
+            ]])
+            ->once()
+            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], $json));
+
+        $this->laposta->updateMember($member);
+
+        $this->assertInstanceOf(\Mrkj\Laposta\Models\Member::class, $member);
+        $this->assertEquals('maartje@example.net', $member->email);
+        $this->assertEquals('optionA', $member->getCustomFields()['prefs'][0]);
+    }
 }

@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use Mrkj\Laposta\Models\List_;
 use Mrkj\Laposta\Models\Member;
 use Mrkj\Laposta\Transformers\ListTransformer;
+use Mrkj\Laposta\Transformers\MemberTransformer;
 
 class Laposta
 {
@@ -147,6 +148,18 @@ class Laposta
         $member = Member::createFromResponse($data['member']);
 
         return $member;
+    }
+
+    /**
+     * @param Member $member
+     */
+    public function updateMember(Member $member)
+    {
+        $data = $this->post('member/'.$member->id.'?'.http_build_query(['list_id' => $member->listId]), [
+            'form_params' => MemberTransformer::toFormParams($member),
+        ]);
+
+        $member->updateFromResponse($data['member']);
     }
 
     /**
