@@ -12,11 +12,22 @@ class ListTransformer
      */
     public static function toFormParams(List_ $list) : array
     {
-        return [
+        $formParams = [
             'name' => $list->name,
-            'remarks' => $list->remarks,
-            'subscribe_notification_email' => $list->subscribeNotificationEmail,
-            'unsubscribe_notification_email' => $list->unsubsribeNotificationEmail,
         ];
+
+        if ($list->remarks) {
+            $formParams['remarks'] = $list->remarks;
+        }
+
+        if ($list->subscribeNotificationEmail) {
+            $formParams['subscribe_notification_email'] = $list->subscribeNotificationEmail;
+        }
+
+        if ($list->unsubsribeNotificationEmail) {
+            $formParams['unsubscribe_notification_email'] = $list->unsubsribeNotificationEmail;
+        }
+
+        return $formParams;
     }
 }

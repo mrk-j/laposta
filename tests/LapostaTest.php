@@ -107,29 +107,23 @@ class LapostaTest extends TestCase
 
     public function testCreateList()
     {
-        $listId = '0a9b0ddz67';
-
-        $list = new \Mrkj\Laposta\Models\List_();
-        $list->name = 'Testlijst';
+        $name = 'Testlijst';
 
         $this->client
             ->shouldReceive('request')
             ->withArgs(['post', 'list', [
                 'form_params' => [
-                    'name' => $list->name,
-                    'remarks' => $list->remarks,
-                    'subscribe_notification_email' => $list->subscribeNotificationEmail,
-                    'unsubscribe_notification_email' => $list->unsubsribeNotificationEmail,
+                    'name' => $name,
                 ],
             ]])
             ->once()
             ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], file_get_contents(__DIR__.'/fixtures/list.json')));
 
-        $this->laposta->createList($list);
+        $list = $this->laposta->createList($name);
 
         $this->assertInstanceOf(\Mrkj\Laposta\Models\List_::class, $list);
-        $this->assertEquals('Testlijst', $list->name);
-        $this->assertEquals($listId, $list->id);
+        $this->assertEquals($name, $list->name);
+        $this->assertEquals('0a9b0ddz67', $list->id);
     }
 
     public function testDeleteList()
@@ -214,6 +208,44 @@ class LapostaTest extends TestCase
             ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], $json));
 
         $this->laposta->updateMember($member);
+
+        $this->assertInstanceOf(\Mrkj\Laposta\Models\Member::class, $member);
+        $this->assertEquals('maartje@example.net', $member->email);
+        $this->assertEquals('optionA', $member->getCustomFields()['prefs'][0]);
+    }
+
+    public function testCreateMember()
+    {
+        $listId = '0a9b0ddz67';
+        $email = 'maartje@example.net';
+        $ip = '198.51.100.10';
+        $sourceUrl = 'http://example.com';
+        $customFields = [
+            'name' => 'Maartje',
+            'dateofbirth' => '1973-05-10 00:00:00',
+            'children' => 3,
+            'prefs' => ['optionA', 'optionB'],
+        ];
+
+        $this->client
+            ->shouldReceive('request')
+            ->withArgs(['post', 'member', [
+                'form_params' => [
+                    'list_id' => $listId,
+                    'ip' => $ip,
+                    'email' => $email,
+                    'source_url' => $sourceUrl,
+                    'custom_fields' => $customFields,
+                ],
+            ]])
+            ->once()
+            ->andReturn(new \GuzzleHttp\Psr7\Response(
+                200,
+                [],
+                file_get_contents(__DIR__.'/fixtures/member.json')
+            ));
+
+        $member = $this->laposta->createMember($listId, $email, $ip, $customFields, $sourceUrl);
 
         $this->assertInstanceOf(\Mrkj\Laposta\Models\Member::class, $member);
         $this->assertEquals('maartje@example.net', $member->email);

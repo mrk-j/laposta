@@ -18,6 +18,18 @@ composer require mrk-j/laposta
 ## Usage
 
 ``` php
+/* Create new Laposta instance */
+$laposta = new Mrkj\Laposta\Laposta('{YOUR API KEY}');
+
+/* Create new List */
+$list = $laposta->createList('New list');
+
+/* Update list */
+$list->name = 'Updated list';
+$laposta->updateList($list);
+
+/* Delete list */
+$laposta->deleteList($list);
 ```
 
 ## Changelog

@@ -75,15 +75,31 @@ class Laposta
     }
 
     /**
-     * @param List_ $list
+     * @param $name
+     * @param null $remarks
+     * @param null $subscribeNotificationEmail
+     * @param null $unsubsribeNotificationEmail
+     * @return List_
      */
-    public function createList(List_ $list)
-    {
+    public function createList(
+        $name,
+        $remarks = null,
+        $subscribeNotificationEmail = null,
+        $unsubsribeNotificationEmail = null
+    ) : List_ {
+        $list = new List_();
+        $list->name = $name;
+        $list->remarks = $remarks;
+        $list->subscribeNotificationEmail = $subscribeNotificationEmail;
+        $list->unsubsribeNotificationEmail = $unsubsribeNotificationEmail;
+
         $data = $this->post('list', [
             'form_params' => ListTransformer::toFormParams($list),
         ]);
 
         $list->updateFromResponse($data['list']);
+
+        return $list;
     }
 
     /**
@@ -151,12 +167,54 @@ class Laposta
     }
 
     /**
+     * @param $listId
+     * @param $email
+     * @param $ip
+     * @param array $customFields
+     * @param null $sourceUrl
+     * @param bool $suppressEmailNotification
+     * @param bool $suppressEmailWelcome
+     * @param bool $ignoreDoubleOptin
+     * @return Member
+     */
+    public function createMember(
+        $listId,
+        $email,
+        $ip,
+        $customFields = [],
+        $sourceUrl = null,
+        $suppressEmailNotification = false,
+        $suppressEmailWelcome = false,
+        $ignoreDoubleOptin = false
+    ) : Member {
+        $member = new Member();
+        $member->listId = $listId;
+        $member->email = $email;
+        $member->ip = $ip;
+        $member->setCustomFields($customFields);
+        $member->sourceUrl = $sourceUrl;
+
+        $data = $this->post('member', [
+            'form_params' => MemberTransformer::toFormParamsForCreate(
+                $member,
+                $suppressEmailNotification,
+                $suppressEmailWelcome,
+                $ignoreDoubleOptin
+            ),
+        ]);
+
+        $member->updateFromResponse($data['member']);
+
+        return $member;
+    }
+
+    /**
      * @param Member $member
      */
     public function updateMember(Member $member)
     {
         $data = $this->post('member/'.$member->id.'?'.http_build_query(['list_id' => $member->listId]), [
-            'form_params' => MemberTransformer::toFormParams($member),
+            'form_params' => MemberTransformer::toFormParamsForUpdate($member),
         ]);
 
         $member->updateFromResponse($data['member']);
