@@ -1,11 +1,11 @@
 {
-    "name": "mrkj/laposta",
+    "name": "mrk-j/laposta",
     "description": "An easy way to work with the Laposta API",
     "keywords": [
         "mrkj",
         "laposta"
     ],
-    "homepage": "https://github.com/mrkj/laposta",
+    "homepage": "https://github.com/mrk-j/laposta",
     "license": "MIT",
     "authors": [
         {
