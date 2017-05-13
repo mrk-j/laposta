@@ -251,4 +251,29 @@ class LapostaTest extends TestCase
         $this->assertEquals('maartje@example.net', $member->email);
         $this->assertEquals('optionA', $member->getCustomFields()['prefs'][0]);
     }
+
+    public function testDeleteMember()
+    {
+        $memberId = '9978ydioiZ';
+        $listId = '0a9b0ddz67';
+
+        $json = file_get_contents(__DIR__.'/fixtures/member-deleted.json');
+
+        $member = \Mrkj\Laposta\Models\Member::createFromResponse(json_decode($json, true)['member']);
+        $member->state = 'active';
+
+        $this->client
+            ->shouldReceive('request')
+            ->withArgs(['delete', 'member/'.$memberId.'?list_id='.$listId, []])
+            ->once()
+            ->andReturn(new \GuzzleHttp\Psr7\Response(200, [], $json));
+
+        $this->laposta->deleteMember($member);
+
+        $this->assertInstanceOf(\Mrkj\Laposta\Models\Member::class, $member);
+        $this->assertEquals('maartje@example.net', $member->email);
+        $this->assertEquals($listId, $member->listId);
+        $this->assertEquals($memberId, $member->id);
+        $this->assertEquals('deleted', $member->state);
+    }
 }

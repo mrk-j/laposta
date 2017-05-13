@@ -17,8 +17,14 @@ class Member
     const STATE_ACTIVE = 'active';
     const STATE_UNSUBSCRIBED = 'unsubscribed';
     const STATE_CLEANED = 'cleaned';
+    const STATE_DELETED = 'deleted';
 
-    const STATES = [self::STATE_ACTIVE, self::STATE_UNSUBSCRIBED, self::STATE_CLEANED];
+    const STATES = [
+        self::STATE_ACTIVE,
+        self::STATE_UNSUBSCRIBED,
+        self::STATE_CLEANED,
+        self::STATE_DELETED,
+    ];
 
     /**
      * @param array $response

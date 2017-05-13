@@ -180,7 +180,7 @@ class Laposta
     public function createMember(
         $listId,
         $email,
-        $ip,
+        $ip = null,
         $customFields = [],
         $sourceUrl = null,
         $suppressEmailNotification = false,
@@ -190,7 +190,7 @@ class Laposta
         $member = new Member();
         $member->listId = $listId;
         $member->email = $email;
-        $member->ip = $ip;
+        $member->ip = $ip ?? (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1');
         $member->setCustomFields($customFields);
         $member->sourceUrl = $sourceUrl;
 
@@ -216,6 +216,16 @@ class Laposta
         $data = $this->post('member/'.$member->id.'?'.http_build_query(['list_id' => $member->listId]), [
             'form_params' => MemberTransformer::toFormParamsForUpdate($member),
         ]);
+
+        $member->updateFromResponse($data['member']);
+    }
+
+    /**
+     * @param Member $member
+     */
+    public function deleteMember(Member $member)
+    {
+        $data = $this->delete('member/'.$member->id.'?'.http_build_query(['list_id' => $member->listId]));
 
         $member->updateFromResponse($data['member']);
     }
