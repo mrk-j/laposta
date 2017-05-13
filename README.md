@@ -6,10 +6,14 @@
 [![StyleCI](https://styleci.io/repos/90415839/shield?branch=master)](https://styleci.io/repos/90415839)
 [![Total Downloads](https://img.shields.io/packagist/dt/mrk-j/laposta.svg?style=flat-square)](https://packagist.org/packages/mrk-j/laposta)
 
-An easy way to work with the Laposta API. This package is currently under development and therefore **not available through Packagist/composer yet**!
+This package provides an easy way to talk to the Laposta API. Laposta is a Dutch platform to send newsletters.
 
-## ~~Installation~~
-~~You can install the package via composer:~~
+The current version of the package provides support to manage lists and members.
+
+For more information regarding the Laposta API you can visit [their documentation](http://api.laposta.nl/doc/?lib=curl).
+
+## Installation
+You can install the package via composer:
 
 ```bash
 composer require mrk-j/laposta
@@ -21,7 +25,7 @@ composer require mrk-j/laposta
 /* Create new Laposta instance */
 $laposta = new Mrkj\Laposta\Laposta('{YOUR API KEY}');
 
-/* Create new List */
+/* Create new list */
 $list = $laposta->createList('New list');
 
 /* Update list */
@@ -30,6 +34,16 @@ $laposta->updateList($list);
 
 /* Delete list */
 $laposta->deleteList($list);
+
+/* Create new member */
+$member = $laposta->createMember($list->id, 'foo@example.com');
+
+/* Update member */
+$member->email = 'bar@example.com';
+$laposta->updateMember($member);
+
+/* Delete member */
+$laposta->deleteMember($member);
 ```
 
 ## Changelog
