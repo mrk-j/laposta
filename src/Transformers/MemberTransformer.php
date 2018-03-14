@@ -68,7 +68,7 @@ class MemberTransformer
             $formParams['email'] = $member->email;
         }
 
-        if ($member->state) {
+        if ($member->state && in_array($member->state, [Member::STATE_ACTIVE, Member::STATE_UNSUBSCRIBED])) {
             $formParams['state'] = $member->state;
         }
 
