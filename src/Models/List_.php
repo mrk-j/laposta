@@ -21,7 +21,7 @@ class List_
      * @param array $response
      * @return List_
      */
-    public static function createFromResponse(array $response) : List_
+    public static function createFromResponse(array $response) : self
     {
         $self = new self;
 

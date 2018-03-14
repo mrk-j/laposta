@@ -30,7 +30,7 @@ class Member
      * @param array $response
      * @return Member
      */
-    public static function createFromResponse(array $response) : Member
+    public static function createFromResponse(array $response) : self
     {
         $self = new self;
 
