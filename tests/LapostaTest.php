@@ -21,15 +21,6 @@ class LapostaTest extends TestCase
      */
     private $client;
 
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->client = Mockery::mock(Client::class);
-
-        $this->laposta = new Laposta($this->apiKey, $this->client);
-    }
-
     public function testEmptyApiKey()
     {
         $this->expectException('\Exception');
@@ -54,7 +45,7 @@ class LapostaTest extends TestCase
 
         $lists = $this->laposta->getLists();
 
-        $this->assertInternalType('array', $lists);
+        $this->assertIsArray($lists);
         $this->assertContainsOnlyInstancesOf(\Mrkj\Laposta\Models\List_::class, $lists);
         $this->assertCount(1, $lists);
         $this->assertEquals('Testlijst', $lists[0]->name);
@@ -160,7 +151,7 @@ class LapostaTest extends TestCase
 
         $members = $this->laposta->getMembers($listId);
 
-        $this->assertInternalType('array', $members);
+        $this->assertIsArray($members);
         $this->assertContainsOnlyInstancesOf(\Mrkj\Laposta\Models\Member::class, $members);
         $this->assertCount(2, $members);
         $this->assertEquals('maartje@example.net', $members[0]->email);
@@ -275,5 +266,14 @@ class LapostaTest extends TestCase
         $this->assertEquals($listId, $member->listId);
         $this->assertEquals($memberId, $member->id);
         $this->assertEquals('deleted', $member->state);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->client = Mockery::mock(Client::class);
+
+        $this->laposta = new Laposta($this->apiKey, $this->client);
     }
 }

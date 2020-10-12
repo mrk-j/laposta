@@ -30,7 +30,7 @@ class Member
      * @param array $response
      * @return Member
      */
-    public static function createFromResponse(array $response) : self
+    public static function createFromResponse(array $response): self
     {
         $self = new self;
 
@@ -59,7 +59,7 @@ class Member
     /**
      * @return array
      */
-    public function getCustomFields() : array
+    public function getCustomFields(): array
     {
         return $this->customFields;
     }

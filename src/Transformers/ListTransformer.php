@@ -10,7 +10,7 @@ class ListTransformer
      * @param List_ $list
      * @return array
      */
-    public static function toFormParams(List_ $list) : array
+    public static function toFormParams(List_ $list): array
     {
         $formParams = [
             'name' => $list->name,
