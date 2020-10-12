@@ -48,7 +48,7 @@ class Laposta
     /**
      * @return List_[]
      */
-    public function getLists() : array
+    public function getLists(): array
     {
         $data = $this->get('list');
 
@@ -65,7 +65,7 @@ class Laposta
      * @param $listId
      * @return List_
      */
-    public function getList($listId) : List_
+    public function getList($listId): List_
     {
         $data = $this->get('list/'.$listId);
 
@@ -86,7 +86,7 @@ class Laposta
         $remarks = null,
         $subscribeNotificationEmail = null,
         $unsubsribeNotificationEmail = null
-    ) : List_ {
+    ): List_ {
         $list = new List_();
         $list->name = $name;
         $list->remarks = $remarks;
@@ -129,7 +129,7 @@ class Laposta
      * @param string $state
      * @return Member[]
      */
-    public function getMembers($list, $state = Member::STATE_ACTIVE) : array
+    public function getMembers($list, $state = Member::STATE_ACTIVE): array
     {
         $listId = $list instanceof List_ ? $list->id : $list;
 
@@ -155,7 +155,7 @@ class Laposta
      * @param string $memberId
      * @return Member
      */
-    public function getMember($list, string $memberId) : Member
+    public function getMember($list, string $memberId): Member
     {
         $listId = $list instanceof List_ ? $list->id : $list;
 
@@ -186,7 +186,7 @@ class Laposta
         $suppressEmailNotification = false,
         $suppressEmailWelcome = false,
         $ignoreDoubleOptin = false
-    ) : Member {
+    ): Member {
         $member = new Member();
         $member->listId = $listId;
         $member->email = $email;
@@ -235,7 +235,7 @@ class Laposta
      * @param array $options
      * @return mixed
      */
-    private function get($uri, $options = []) : array
+    private function get($uri, $options = []): array
     {
         return $this->request('get', $uri, $options);
     }
@@ -245,7 +245,7 @@ class Laposta
      * @param array $options
      * @return mixed
      */
-    private function post($uri, $options = []) : array
+    private function post($uri, $options = []): array
     {
         return $this->request('post', $uri, $options);
     }
@@ -255,7 +255,7 @@ class Laposta
      * @param array $options
      * @return array
      */
-    private function delete($uri, $options = []) : array
+    private function delete($uri, $options = []): array
     {
         return $this->request('delete', $uri, $options);
     }
@@ -266,7 +266,7 @@ class Laposta
      * @param array $options
      * @return array
      */
-    private function request($method, $uri, $options = []) : array
+    private function request($method, $uri, $options = []): array
     {
         $response = $this->client->request($method, $uri, $options);
 

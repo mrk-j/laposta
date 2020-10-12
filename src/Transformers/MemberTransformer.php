@@ -18,7 +18,7 @@ class MemberTransformer
         $suppressEmailNotification = false,
         $suppressEmailWelcome = false,
         $ignoreDoubleOptin = false
-    ) : array {
+    ): array {
         $formParams = [
             'list_id' => $member->listId,
             'ip' => $member->ip,
